@@ -92,7 +92,6 @@ public class IntList {
             aTail.rest = B;
             return A;
         }
-
     }
 
     /**
