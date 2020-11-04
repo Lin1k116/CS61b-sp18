@@ -7,7 +7,7 @@ public class LinkedListDeque<T> {
         public T item;
         public IntNode next;
 
-        public IntNode(T i, IntNode n, IntNode p){
+        public IntNode(T i, IntNode n, IntNode p) {
             prev = p;
             item = i;
             next = n;
@@ -18,7 +18,7 @@ public class LinkedListDeque<T> {
     private int size;
 
     /**创建空链表**/
-    public LinkedListDeque(){
+    public LinkedListDeque() {
         sentinel = new IntNode(null, null, null);
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
@@ -26,49 +26,49 @@ public class LinkedListDeque<T> {
     }
 
     /**other复制**/
-    public LinkedListDeque(LinkedListDeque<T> other){
+    public LinkedListDeque(LinkedListDeque<T> other) {
         sentinel = new IntNode(null, null, null);
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
         size = 0;
 
-        for(int i = 0; i < other.size(); i += 1){
+        for(int i = 0; i < other.size(); i += 1) {
             addFirst(other.get(i));
         }
     }
 
     /**Adds an item of type to the front of the deque**/
-    public void addFirst(T item){
+    public void addFirst(T item) {
         sentinel.next = new IntNode(item, sentinel.next, sentinel);
         sentinel.next.next.prev = sentinel.next;
         size += 1;
     }
 
     /**Adds an item of type to the back of the deque**/
-    public void addLast(T item){
+    public void addLast(T item) {
         sentinel.prev = new IntNode(item, sentinel, sentinel.prev);
         sentinel.prev.prev.next = sentinel.prev;
         size += 1;
     }
 
     /**Returns true if deque is empty, false otherwise**/
-    public boolean isEmpty(){
-        if (sentinel.next == sentinel){
+    public boolean isEmpty() {
+        if (sentinel.next == sentinel) {
             return true;
         }
         return false;
     }
 
     /**Returns the number of items in the deque**/
-    public int size(){
+    public int size() {
         return size;
     }
 
     /**Prints the items in the deque from first to last, separatedby a space.
      * Once all the items have been printed, print out a new line.**/
-    public void printDeque(){
+    public void printDeque() {
         IntNode p = sentinel;
-        while(p.next != sentinel){
+        while(p.next != sentinel) {
             System.out.print(p.next.item + " ");
             p = p.next;
         }
@@ -76,8 +76,8 @@ public class LinkedListDeque<T> {
     }
 
     /**Removes and returns the item at the front of the deque. If no such item exists, returns null.**/
-    public T removeFirst(){
-        if(sentinel.next == sentinel){
+    public T removeFirst() {
+        if(sentinel.next == sentinel) {
             return null;
         }
         T r = sentinel.next.item;
@@ -88,8 +88,8 @@ public class LinkedListDeque<T> {
     }
 
     /**Removes and returns the item at the back of the deque. If no such item exists, returns null.**/
-    public T removeLast(){
-        if(sentinel.next == sentinel){
+    public T removeLast() {
+        if(sentinel.next == sentinel) {
             return null;
         }
         T r = sentinel.prev.item;
@@ -100,12 +100,12 @@ public class LinkedListDeque<T> {
     }
 
     /**Gets the item at the given index**/
-    public T get(int index){
-        if (index >= size){
+    public T get(int index) {
+        if (index >= size) {
             return null;
         }
         IntNode p = sentinel;
-        while(index != 0){
+        while(index != 0) {
             p = p.next;
             index -= 1;
         }
@@ -113,15 +113,15 @@ public class LinkedListDeque<T> {
     }
 
     /**Same as get, but uses recursion**/
-    public T getRe1(IntNode n, int i){
-        if(i == 0){
+    public T getRe1(IntNode n, int i) {
+        if(i == 0) {
             return n.item;
         }
         return getRe1(n.next, i - 1);
     }
 
-    public T getRecursive(int index){
-        if (index >= size){
+    public T getRecursive(int index) {
+        if (index >= size) {
             return null;
         }
         IntNode p = sentinel;
