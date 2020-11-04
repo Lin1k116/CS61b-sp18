@@ -128,22 +128,22 @@ public class LinkedListDeque<T> {
         return getRe1(p, index);
     }
 
-    /**简单测试部分**/
-    public static void main(String[]args){
-        LinkedListDeque t = new LinkedListDeque();
-        System.out.println("前置空链表判断：" + t.isEmpty());
-        t.addFirst(1);
-        t.addFirst(3);
-        t.addFirst(5);
-        t.addLast(6);
-        t.addLast(8);
-        System.out.println("未删除大小：" + t.size());
-        System.out.println("后置空链表判断：" + t.isEmpty());
-        System.out.print("顺序输出：");
-        t.printDeque();
-        System.out.println("第三位检索：" + t.get(3));
-        System.out.println("去F：" + t.removeFirst());
-        System.out.println("去L：" + t.removeLast());
-        System.out.println("recursive_get:" + t.getRecursive(3));
-    }
+//    /**简单测试部分**/
+//    public static void main(String[]args){
+//        LinkedListDeque t = new LinkedListDeque();
+//        System.out.println("前置空链表判断：" + t.isEmpty());
+//        t.addFirst(1);
+//        t.addFirst(3);
+//        t.addFirst(5);
+//        t.addLast(6);
+//        t.addLast(8);
+//        System.out.println("未删除大小：" + t.size());
+//        System.out.println("后置空链表判断：" + t.isEmpty());
+//        System.out.print("顺序输出：");
+//        t.printDeque();
+//        System.out.println("第三位检索：" + t.get(3));
+//        System.out.println("去F：" + t.removeFirst());
+//        System.out.println("去L：" + t.removeLast());
+//        System.out.println("recursive_get:" + t.getRecursive(3));
+//    }
 }
