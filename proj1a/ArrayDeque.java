@@ -33,7 +33,7 @@ public class ArrayDeque<T> {
      *
      * @param capacity
      */
-    public void resize(int capacity) {
+    private void resize(int capacity) {
         T[] a = (T[]) new Object[capacity];
         int toCopy = next(nextFirst);
         for (int i = 0; i < size; i += 1) {
@@ -83,7 +83,9 @@ public class ArrayDeque<T> {
      *
      * @return
      */
-    public int size() { return size; }
+    public int size() {
+        return size;
+    }
 
     /**print the item in the deque form first to last
      *
@@ -125,7 +127,7 @@ public class ArrayDeque<T> {
         }
         T a = items[prev(nextLast)];
         items[prev(nextLast)] = null;
-        nextLast = next(nextLast);
+        nextLast = prev(nextLast);
         size -= 1;
         if (items.length >= 16 && size <= (items.length / 4)) {
             resize(items.length / 2);
@@ -143,19 +145,22 @@ public class ArrayDeque<T> {
         return items[next(nextFirst + index)];
     }
 
-    /**testing
-     *
-     */
-    public static void main(String[] args) {
-        ArrayDeque t = new ArrayDeque();
-        System.out.println("isEmpty: " + t.isEmpty());
-        System.out.println(t.size);
-        t.addFirst(3);
-        t.addFirst(2);
-        t.addFirst(1);
-        t.addLast(4);
-        t.addLast(5);
-        t.printDeque();
-        System.out.println("byebye");
-    }
+//    /**testing
+//     *
+//     */
+//    public static void main(String[] args) {
+//        ArrayDeque t = new ArrayDeque();
+//        System.out.println("isEmpty: " + t.isEmpty());
+//        System.out.println(t.size);
+//        t.addFirst(3);
+//        t.addFirst(2);
+//        t.addFirst(1);
+//        t.addLast(4);
+//        t.addLast(5);
+//        t.printDeque();
+//        System.out.println(t.get(0));
+//        System.out.println(t.get(4));
+//        System.out.println(t.get(3));
+//        System.out.println("byebye");
+//    }
 }
