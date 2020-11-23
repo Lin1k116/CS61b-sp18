@@ -1,6 +1,3 @@
-import org.omg.CORBA.Object;
-
-import java.util.Arrays;
 
 public class ArrayDeque<T> {
     private T[] items;
