@@ -1,75 +1,164 @@
-public class ArrayDeque {
-    int[] x;
-    int size;
+import org.omg.CORBA.Object;
 
-    public ArrayDeque(){
-        x = new int[8];
+import java.util.Arrays;
+
+public class ArrayDeque<T> {
+    private T[] items;
+    private int nextFirst;
+    private int nextLast;
+    private int size;
+
+    /**initialise the deque
+     *
+     */
+    public ArrayDeque() {
+        items = (T[]) new Object[8];
+        nextFirst = 0;
+        nextLast = 1;
         size = 0;
     }
 
-    public void resize(int capacity){
-        int[] a = new int[capacity];
-        System.arraycopy(x, 0, a, 0, size);
-        x = a;
+    /**下一个位置索引"next"
+     *
+     */
+    private int next(int n) {
+        return (n + 1) % items.length;
     }
 
-    public void addFirst(int a) {
-        if (size == x.length) {
+    /**上一个位置索引"prev"
+     *
+     */
+    private int prev(int n) {
+        return (n - 1 + items.length) % items.length;
+    }
+
+    /**resize the deque by capacity
+     *
+     * @param capacity
+     */
+    public void resize(int capacity) {
+        T[] a = (T[]) new Object[capacity];
+        int toCopy = next(nextFirst);
+        for (int i = 0; i < size; i += 1) {
+            a[i] = items[toCopy];
+            toCopy = next(toCopy);
+        }
+        this.items = a;
+        nextFirst = this.items.length - 1;
+        nextLast = size;
+    }
+
+    /**add an item of the type to the first of the deque
+     *
+     * @param a
+     */
+    public void addFirst(T a) {
+        if (size == items.length) {
             resize(size * 2);
         }
-        for (int i = size - 1; i >= 0; i--){
-            x[size + 1] = x[size];
-        }
-        x[size] = a;
-        size ++;
+        items[nextFirst] = a;
+        nextFirst = prev(nextFirst);
+        size += 1;
     }
 
-    public void addLast(int a) {
-        if (size == x.length) {
+    /**add an item if the type to the last of the deque
+     *
+     * @param a
+     */
+    public void addLast(T a) {
+        if (size == items.length) {
             resize(size * 2);
         }
-        x[size] = a;
-        size ++;
+        items[nextLast] = a;
+        nextLast = next(nextLast);
+        size += 1;
     }
 
-    public boolean isEmpty(){
-        if(x.length == 0){
-            return true;
-        }
-        return false;
+    /**return true if the deque is empty, false otherwise
+     *
+     * @return
+     */
+    public boolean isEmpty() {
+        return size == 0;
     }
 
-    public int size(){
-        return size;
-    }
+    /**return the size of the deque
+     *
+     * @return
+     */
+    public int size() { return size; }
 
-    public void printDeque(){
-        for (int i:x){
-            System.out.print(i + " ");
+    /**print the item in the deque form first to last
+     *
+     */
+    public void printDeque() {
+        int toPrint = next(nextFirst);
+        while (items[toPrint] != null) {
+            System.out.print(items[toPrint] + " ");
+            toPrint = next(toPrint);
         }
         System.out.println();
     }
 
-    public int removeFirst(){
-        int a = x[0];
-        for (int i:x){
-            x[i] = x[i + 1];
+    /**remove and return the first item in the deque
+     *
+     * @return
+     */
+    public T removeFirst() {
+        if (size == 0) {
+            return null;
         }
-        size --;
+        T a = items[next(nextFirst)];
+        items[next(nextFirst)] = null;
+        nextFirst = next(nextFirst);
+        size -= 1;
+        if (items.length >= 16 && size <= (items.length / 4)) {
+            resize(items.length / 2);
+        }
         return a;
     }
 
-    public int getLast(){
-        return x[size - 1];
-    }
-
-    public int removeLast(){
-        int a = getLast();
-        size --;
+    /**remove and return the last item in the deque
+     *
+     * @return
+     */
+    public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
+        T a = items[prev(nextLast)];
+        items[prev(nextLast)] = null;
+        nextLast = next(nextLast);
+        size -= 1;
+        if (items.length >= 16 && size <= (items.length / 4)) {
+            resize(items.length / 2);
+        }
         return a;
     }
 
-    public int get(int index){
-        return x[0];
+    /**get the 'index'th item in the deque
+     *
+     */
+    public T get(int index) {
+        if (index > size) {
+            return null;
+        }
+        return items[next(nextFirst + index)];
+    }
+
+    /**testing
+     *
+     */
+    public static void main(String[] args) {
+        ArrayDeque t = new ArrayDeque();
+        System.out.println("isEmpty: " + t.isEmpty());
+        System.out.println(t.size);
+        t.addFirst(3);
+        t.addFirst(2);
+        t.addFirst(1);
+        t.addLast(4);
+        t.addLast(5);
+        t.printDeque();
+        System.out.println("byebye");
     }
 }
