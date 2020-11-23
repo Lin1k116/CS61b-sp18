@@ -30,7 +30,7 @@ public class LinkedListDeque<T> {
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
         size = 0;
-        for(int i = 0; i < other.size(); i += 1) {
+        for (int i = 0; i < other.size(); i += 1) {
             addLast(other.get(i));
         }
     }
@@ -70,7 +70,9 @@ public class LinkedListDeque<T> {
         System.out.println();
     }
 
-    /**Removes and returns the item at the front of the deque. If no such item exists, returns null.**/
+    /**Removes and returns the item at the front of the deque.
+     * If no such item exists, returns null.
+     */
     public T removeFirst() {
         if (sentinel.next == sentinel) {
             return null;
@@ -82,9 +84,12 @@ public class LinkedListDeque<T> {
         return r;
     }
 
-    /**Removes and returns the item at the back of the deque. If no such item exists, returns null.**/
+    /**Removes and returns the item at the back of the deque.
+     * If no such item exists, returns null.
+     *
+     */
     public T removeLast() {
-        if(sentinel.next == sentinel) {
+        if (sentinel.next == sentinel) {
             return null;
         }
         T r = sentinel.prev.item;
@@ -100,7 +105,7 @@ public class LinkedListDeque<T> {
             return null;
         }
         IntNode p = sentinel;
-        while(index != 0) {
+        while (index != 0) {
             p = p.next;
             index -= 1;
         }
@@ -109,7 +114,7 @@ public class LinkedListDeque<T> {
 
     /**Same as get, but uses recursion**/
     public T getRe1(IntNode n, int i) {
-        if(i == 0) {
+        if (i == 0) {
             return n.next.item;
         }
         return getRe1(n.next, i - 1);
@@ -124,7 +129,7 @@ public class LinkedListDeque<T> {
     }
 
 //    /**简单测试部分**/
-//    public static void main(String[]args){
+//    public static void main(String[]args) {
 //        LinkedListDeque t = new LinkedListDeque();
 //        System.out.println("空链表判断：" + t.isEmpty());
 //        t.addFirst(1);
