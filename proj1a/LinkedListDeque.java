@@ -24,16 +24,16 @@ public class LinkedListDeque<T> {
         size = 0;
     }
 
-    /**other复制**/
-    public LinkedListDeque(LinkedListDeque<T> other) {
-        sentinel = new IntNode(null, null, null);
-        sentinel.next = sentinel;
-        sentinel.prev = sentinel;
-        size = 0;
-        for (int i = 0; i < other.size(); i += 1) {
-            addLast(other.get(i));
-        }
-    }
+//    /**other复制**/
+//    public LinkedListDeque(LinkedListDeque<T> other) {
+//        sentinel = new IntNode(null, null, null);
+//        sentinel.next = sentinel;
+//        sentinel.prev = sentinel;
+//        size = 0;
+//        for (int i = 0; i < other.size(); i += 1) {
+//            addLast(other.get(i));
+//        }
+//    }
 
     /**Adds an item of type to the front of the deque**/
     public void addFirst(T item) {
@@ -113,7 +113,7 @@ public class LinkedListDeque<T> {
     }
 
     /**Same as get, but uses recursion**/
-    public T getRe1(IntNode n, int i) {
+    private T getRe1(IntNode n, int i) {
         if (i == 0) {
             return n.next.item;
         }
