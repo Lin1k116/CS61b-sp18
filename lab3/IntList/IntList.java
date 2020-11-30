@@ -11,7 +11,7 @@ public class IntList {
     /**
      * First element of list.
      */
-    private int fxirst;
+    private int first;
     /**
      * Remaining elements of list.
      */
