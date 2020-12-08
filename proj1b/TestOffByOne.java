@@ -1,5 +1,4 @@
 import org.junit.Test;
-import org.omg.CORBA.PUBLIC_MEMBER;
 
 import static org.junit.Assert.*;
 
